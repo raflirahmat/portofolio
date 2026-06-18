@@ -12,7 +12,6 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
     <style>
       :root {
         --accent-color: #d63031;
@@ -29,6 +28,42 @@
         background-color: var(--dark-bg);
         margin: 0;
         line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- SPLASH SCREEN --- */
+      .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--dark-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        color: white;
+        
+      }
+
+      .splash-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: 20px;
+      }
+
+      .splash-title {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: fadeInUp 1s ease;
       }
 
       /* --- NAVBAR --- */
@@ -41,7 +76,7 @@
 
       .navbar-brand {
         font-size: 1rem;
-        letter-spacing: 1px; /* Jarak dirapatkan */
+        letter-spacing: 1px;
         font-weight: 600;
         color: white !important;
       }
@@ -57,7 +92,7 @@
       .nav-link {
         font-size: 0.85rem;
         text-transform: capitalize;
-        letter-spacing: 0.5px; /* Jarak lebih rapat */
+        letter-spacing: 0.5px;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.8) !important;
         margin-left: 20px;
@@ -71,7 +106,7 @@
         height: 100vh;
         background:
           linear-gradient(to top, var(--dark-bg) 0%, rgba(0, 0, 0, 0) 50%),
-          url("img/foto.png");
+          url("img/uciha.png");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -88,7 +123,7 @@
       .hero-content h1 {
         font-size: clamp(2.5rem, 6vw, 3.5rem);
         font-weight: 600;
-        letter-spacing: -0.5px; /* Dibuat lebih rapat agar tegas */
+        letter-spacing: -0.5px;
         text-transform: uppercase;
         margin-bottom: 10px;
       }
@@ -109,27 +144,8 @@
         letter-spacing: 0px;
         margin-bottom: 50px;
         text-align: center;
-        color: #fff;
+        color: #d63031;
       }
-
-      /* --- GALLERY --- */
-      .gallery-wrapper {
-        overflow: hidden;
-        border-radius: 8px;
-        border: 1px solid var(--glass-border);
-        margin-bottom: 25px;
-      }
-      .gallery-img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-        transition: transform 0.8s ease;
-      }
-      .gallery-wrapper:hover .gallery-img {
-        transform: scale(1.05);
-      }
-
-      /* --- CONTACT BOX --- */
       .contact-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--glass-border);
@@ -151,7 +167,7 @@
 
       .btn-instagram {
         display: inline-block;
-        background-color: white;
+        background-color: #d63031;
         color: black;
         padding: 12px 40px;
         font-size: 0.9rem;
@@ -184,6 +200,18 @@
         }
       }
 
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
       @media (max-width: 991px) {
         .navbar-collapse {
           background: rgba(15, 17, 19, 0.98);
@@ -196,10 +224,227 @@
           padding: 12px 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
+        /* Perbaikan Background Hero di HP agar fokus/wajah tidak terpotong */
+        .hero {
+          background-attachment: scroll; 
+          background-position: center 25%; 
+        }
       }
+      /* --- SPLASH SCREEN BARU --- */
+      .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .splash-video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .splash-overlay {
+        position: relative;
+        text-align: center;
+        color: white;
+        z-index: 1;
+      }
+      .btn-enter {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .btn-enter:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+      }
+      .hidden {
+        display: none !important;
+      }
+.typing-text {
+  overflow: hidden;
+  border-right: .15em solid var(--accent-color);
+  white-space: nowrap;
+ margin: 0;   
+  text-align: left;
+  animation: 
+    typing 3s steps(40, end) infinite, 
+    blink-caret .75s step-end infinite;
+  width: 0; 
+  animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  60% { width: 100%; } 
+  100% { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color) }
+}
+/* --- MARQUEE STYLE (DIPERBAIKI) --- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--accent-color);
+  padding: 4px 0; /* Padding atas dan bawah diperkecil agar kotak lebih tipis */
+  white-space: nowrap;
+  line-height: 1; /* Menghilangkan ruang tambahan di bawah teks */
+}
+
+.marquee-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 10s linear infinite; /* Animasi sedikit diperlambat agar lebih nyaman */
+  color: white;
+  font-weight: 400; 
+  font-size: 0.75rem; /* Ukuran huruf diperkecil agar tidak mendominasi */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+.education-section {
+  position: relative;
+  background-image: url("img/malang.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Efek parallax keren saat di-scroll (Opsional) */
+  padding: 80px 0;
+}
+/* Lapisan gelap transparan di atas foto agar teks tetap terbaca dengan jelas */
+.education-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    15,
+    23,
+    42,
+    0.85
+  ); /* Campuran warna gelap (kehitaman/biru tua) */
+  z-index: 1;
+}
+
+/* Opsional: Membuat kotak riwayat pendidikan (card) terlihat semi-transparan & modern */
+.education-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(8px); /* Efek kaca buram kekinian */
+  transition: transform 0.3s ease;
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  border-color: #d63031; /* Highlight warna hijau khas portofoliomu saat disentuh */
+}
+.education-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    15,
+    23,
+    42,
+    0.85
+  ); /* <--- Angka 0.85 ini yang bikin gelap */
+  z-index: 1;
+}
+.education-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Mengubah tingkat kegelapan dari 0.85 menjadi 0.55 agar foto kampus lebih kelihatan jelas */
+  background-color: rgba(15, 23, 42, 0.55);
+  z-index: 1;
+}
+/* Memastikan logo di bagian kanan tidak gepeng atau mengecil di layar HP */
+.logo-kampus {
+  flex-shrink: 0;
+  margin-left: 15px; /* Memberikan jarak aman agar teks tidak menempel ke logo */
+}
+
+.instansi-logo {
+  max-height: 65px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.instansi-logo:hover,
+.company-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Filter logo agar putih bersih di latar gelap */
+.filter-brightness {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* Pengalaman Section Logos */
+.company-logo {
+  max-height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+.company-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
     </style>
   </head>
   <body>
+    <div class="splash-screen" id="splash">
+      <video autoplay muted loop playsinline class="splash-video">
+        <source src="img/iciha itachi.mp4" type="video/mp4">
+      </video>
+      <div class="splash-overlay">
+        <h1 class="mb-4">SELAMAT DATANG</h1>
+        <button class="btn-enter" onclick="enterSite()">MASUK</button>
+      </div>
+    </div>
+
+    <script>
+      function enterSite() {
+        document.getElementById('splash').classList.add('hidden');
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">PORTFOLIO RAFLI</a>
@@ -220,9 +465,16 @@
               <a class="nav-link" href="#about">Tentang</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#gallery">Galeri</a>
+              <a class="nav-link" href="#portfolio">Portfolio</a>
+              </li>
+               <li class="nav-item">
+              <a class="nav-link" href="#education">Pendidikan</a>
             </li>
-            <li class="nav-item">
+               <li class="nav-item">
+              <a class="nav-link" href="#experience">Pengalaman</a>
+            </li>
+
+               <li class="nav-item">
               <a class="nav-link" href="#contact">Kontak</a>
             </li>
           </ul>
@@ -231,15 +483,22 @@
     </nav>
 
     <section class="hero" id="home">
-      <div class="hero-content">
-        <div class="accent-line"></div>
-        <h1>SELAMAT<br />DATANG</h1>
-        <p style="font-weight: 300; opacity: 0.8; font-size: 1rem">
-          Hallo! Selamat Datang Di Website Saya
-        </p>
-      </div>
-    </section>
-
+  <div class="hero-content">
+    <div class="accent-line"></div>
+    <h1>SELAMAT<br />DATANG</h1>
+    <p class="typing-text" style="font-weight: 300; opacity: 0.8; font-size: 1rem; width: fit-content;">
+      Hallo! Selamat Datang Di Website Saya
+    </p>
+  </div>
+</section>
+<div class="marquee-container">
+  <div class="marquee-text">
+    Selamat Datang di Website Portfolio Rafli & Rahmat &nbsp;&bull;&nbsp; 
+    Web Developer & UI/UX Design &nbsp;&bull;&nbsp; 
+    Siap untuk Proyek Baru! &nbsp;&bull;&nbsp; 
+    Selamat Datang di Website Portfolio Rafli & Rahmat
+  </div>
+</div>
     <section id="about" class="section-padding container text-center">
       <h2 class="section-title">Tentang Saya</h2>
       <p
@@ -261,46 +520,198 @@
       </p>
     </section>
 
-    <section
-      id="gallery"
-      class="section-padding"
-      style="background: rgba(255, 255, 255, 0.01)"
-    >
-      <h2 class="section-title">Gallery</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto5.png" class="gallery-img" />
-          </div>
+    <section id="portfolio" class="section-padding container">
+      <div class="container konten-marquee">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Portfolio</h2>
+          <p class="text-white">
+            Berikut beberapa project yang pernah dikembangkan
+          </p>
         </div>
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto6.png" class="gallery-img" />
-          </div>
+        <div class="row g-4">
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/drop dead.png" alt="Drop Dead Collection" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="card-body">
+    <h5 class="card-title">Drop Dead Store Website</h5>
+    <a href="https://raflirahmat.github.io/Drop-Dead-website/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+        Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <p class="card-text mt-2">Website e-commerce modern yang responsif di HP. Dilengkapi fitur filter kategori produk, keranjang belanja, dan integrasi pesanan via WhatsApp API.</p>
+</div>
         </div>
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto7.png" class="gallery-img" />
-          </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/toko kopi.png" alt="kenangan senja" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+          <div class="card-body">
+    <h5 class="card-title">kopi kenangan senja Website</h5>
+    <a href="https://raflirahmat.github.io/kenangansenja/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+        Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <p class="card-text mt-2">Website toko online kopi yang responsif di HP. Dilengkapi sistem keranjang belanja dan tombol interaksi pesanan langsung terintegrasi dengan WhatsApp API.</p>
+</div>
         </div>
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto8.png" class="gallery-img" />
-          </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/web sekolah.png" alt="website sekolah" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="card-body">
+    <h5 class="card-title">website sekolah</h5>
+    <a href="https://raflirahmat.github.io/web-sekolah/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+        Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <p class="card-text mt-2">Website profil sekolah resmi yang responsif di HP. Menyediakan informasi lengkap mengenai program ekstrakurikuler, fasilitas, berita sekolah, serta integrasi tombol pendaftaran PPDB online.</p>
+</div>
         </div>
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto7.png" class="gallery-img" />
-          </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/toko online.png" alt="website toko online" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+          <div class="card-body">
+    <h5 class="card-title">website toko online</h5>
+    <a href="https://raflirahmat.github.io/rafli-fashion/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+        Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+    <p class="card-text mt-2">Website e-commerce toko baju (Rafli Fashion) yang responsif di HP. Dilengkapi sistem keranjang belanja dan tombol checkout pesanan langsung otomatis via WhatsApp API.</p>
+</div>
         </div>
-        <div class="col-md-4">
-          <div class="gallery-wrapper">
-            <img src="img/foto7.png" class="gallery-img" />
+    </div>
+
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper bg-dark d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden;">
+                <video src="img/gesture-demo.mp4" controls class="w-100 h-100 rounded-top-4" style="object-fit: cover;"></video>
+            </div>
+            <div class="card-body p-4">
+                <h4 class="fw-bold text-dark mb-2" style="font-size: 1.1rem;">Hand Gesture Detection</h4>
+               <a href="https://drive.google.com/file/d/1SYX4SrdHDg0H5SYFsq_DZLOfHIRr4agr/view?usp=sharing" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+        Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+                <p class="text-muted small mb-0">Aplikasi desktop pengenal gerakan tangan real-time menggunakan framework MediaPipe dan Python.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/company.png" alt="Proyek 3" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Web company profile</h5>
+             <a href="https://raflirahmat.github.io/bootstrep5/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+                 Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+             </a>
+            <p class="card-text mt-2">Website profil perusahaan edukasi modern yang responsif di HP. Menyediakan informasi program materi keahlian, fitur kursus, dan layanan belajar digital.</p>
           </div>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/kopi senja.jpg" alt="Proyek 3" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">website coffe kopi senja</h5>
+             <a href="https://raflirahmat.github.io/kopi-senja-website/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+                 Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+             </a>
+            <p class="card-text mt-2">Kopi Senja adalah website profil kedai kopi modern yang responsif di HP. Dilengkapi fitur pencarian menu instan dan tombol pesan langsung via WhatsApp untuk mempermudah pelanggan.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card project-item-card border-0 bg-white shadow-sm h-100">
+            <div class="project-img-wrapper" style="height: 200px; overflow: hidden;">
+                <img src="img/profil.png" alt="Proyek 3" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Company Profile</h5>
+             <a href="https://raflirahmat.github.io/contoh-web-github.io/" target="_blank" class="project-link" style="text-decoration: none; color: #d63031; font-weight: 500;">
+                 Lihat Disini <i class="fa-solid fa-arrow-up-right-from-square"></i>
+             </a>
+            <p class="card-text mt-2">Website profil perusahaan agensi (Rumahrafli) yang responsif di HP. Menyediakan informasi daftar layanan, portofolio proyek, profil tim, dan kontak kerja sama bisnis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
     </section>
+    <section id="education" class="section-padding container">
+    <div class="container konten-marquee container text-white position-relative" style="z-index: 2;">
+        <h2 class="section-title">Riwayat Pendidikan</h2>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="education-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="font-weight-bold text-white mb-1">Universitas Merdeka Malang</h4>
+                            <p class="text-white">S1 - Sistem Informasi</p>
+                        </div>
+                        
+                        <!-- Bagian Kanan: Logo UNMER -->
+                        <div class="logo-kampus">
+                        <img src="img/logo unmer.png" alt="Logo UNMER" style="width: 85px; height: auto; object-fit: contain;">
+                         </div>
 
+                    </div>
+
+                    <!-- Garis pembatas tipis -->
+                    <hr style="border-color: rgba(255, 255, 255, 0.1); margin-top: 15px; margin-bottom: 15px;">
+                </div>
+                <!-- ========================================================= -->
+
+            </div>
+        </div>
+
+    </div>
+</section>
+ <section id="experience" class="py-5 bg-white text-center border-bottom">
+      <div class="container konten-marquee">
+        <h6 class="text-uppercase fw-bold text-dark mb-2 tracking-wide">
+          Pengalaman
+        </h6>
+        <h2 class="display-8 fw-bold text-dark mb-3">
+          Pengalaman Kerja, Freelance, & Magang
+        </h2>
+        <p class="text-muted mb-5">
+          Pernah dan sedang bekerja pada perusahaan berikut
+        </p>
+
+        <div
+          class="d-flex flex-wrap justify-content-center align-items-center gap-5 logo-container-row"
+        >
+          <img
+            src="img/daksa.png"
+            alt="daksa digital"
+            class="company-logo"
+          />
+          <img
+            src="img/sasana.png"
+            alt="Company 2"
+            class="company-logo"
+          />
+          <img
+            src="img/download.png"
+            alt="Company 3"
+            class="company-logo"
+          />
+             <img
+            src="img/telkom.png"
+            alt="Company 3"
+            class="company-logo"
+          />
+        </div>
+      </div>
+    </section>
     <section id="contact" class="section-padding container">
       <h2 class="section-title">Hubungi Saya</h2>
       <div class="contact-card">
